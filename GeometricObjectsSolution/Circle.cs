@@ -73,6 +73,11 @@ namespace GeometricObjectsSolution
             Radius += dRadius;
         }
 
+        public override string ToString()
+        {
+            return "Circle, R=" + Radius + ",Fläche=" + GetArea();
+        }
+
         // -------------Klassenmethoden-----------------
 
         public static double GetArea(int radius)

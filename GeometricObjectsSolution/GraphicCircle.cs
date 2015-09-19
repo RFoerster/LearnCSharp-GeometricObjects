@@ -18,5 +18,10 @@ namespace GeometricObjectsSolution
         {
             Console.WriteLine("Der Kreis wird gezeichnet");
         }
+
+        public override string ToString()
+        {
+            return "Circle, Regenobge=" + Radius + ",Fläche=" + GetArea();
+        }
     }
 }
