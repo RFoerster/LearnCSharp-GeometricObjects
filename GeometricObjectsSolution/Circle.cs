@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeometricObjectsSolution
 {
-    public class Circle
+    public class Rectangle : GeometricObject
     {
         // -------------Klasseneigenschaft-----------------
 
@@ -18,23 +18,21 @@ namespace GeometricObjectsSolution
 
         // -------------Konstruktoren-----------------
 
-        public Circle() : this(0, 0, 0) { }
-        public Circle(int radius) : this(radius, 0, 0) { }
-        public Circle(int radius, double x, double y)
+        public Rectangle() : this(0, 0, 0) { }
+        public Rectangle(int radius) : this(radius, 0, 0) { }
+        public Rectangle(int radius, double x, double y)
         {
             Radius = radius;
             XCoordinate = x;
             YCoordinate = y;
-            Circle._CountCircles++;
+            Rectangle._CountCircles++;
         }
 
         // -------------Eigenschaften-----------------
 
-        public double XCoordinate {get; set; }
-        public double YCoordinate { get; set; }
         protected int _Radius;
 
-        public int Radius
+        public virtual int Radius
         {
             get { return _Radius; }
             set
@@ -49,24 +47,17 @@ namespace GeometricObjectsSolution
 
         // -------------Instanzmethoden-----------------
 
-        public double GetArea()
+        public override double GetArea()
         {
             return Math.Pow(Radius, 2) * Math.PI;
         }
 
-        public double GetCircumference()
+        public override double GetCircumference()
         {
             return 2 * Radius * Math.PI;
         }
 
-        public int Bigger(Circle kreis)
-        {
-            if (kreis == null || Radius > kreis.Radius) return 1;
-            if (Radius < kreis.Radius) return -1;
-            else return 0;
-        }
-
-        public void Move(double dx, double dy, int dRadius)
+        public virtual void Move(double dx, double dy, int dRadius)
         {
             XCoordinate += dx;
             YCoordinate += dy;
@@ -90,12 +81,5 @@ namespace GeometricObjectsSolution
             return 2 * radius * Math.PI;
         }
 
-        public static int Bigger(Circle kreis1, Circle kreis2)
-        {
-            if (kreis1 == null && kreis2.Radius == 0) return 0;
-            if (kreis1 == null || kreis1.Radius < kreis2.Radius) return -1;
-            if (kreis2 == null || kreis2.Radius < kreis1.Radius) return 1;
-            return 0;
-        }
     }
 }

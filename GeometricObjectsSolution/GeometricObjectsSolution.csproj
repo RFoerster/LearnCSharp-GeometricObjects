@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circle.cs" />
+    <Compile Include="GeometricObject.cs" />
     <Compile Include="GraphicCircle.cs" />
     <Compile Include="Luftfahrzeug.cs" />
     <Compile Include="Program.cs" />
