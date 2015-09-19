@@ -10,7 +10,7 @@ namespace GeometricObjectsSolution
     {
         // -------------Klasseneigenschaft-----------------
 
-        private static int _CountCircles;
+        protected static int _CountCircles;
         public static int CountCircles
         {
             get { return _CountCircles; }
@@ -32,7 +32,7 @@ namespace GeometricObjectsSolution
 
         public double XCoordinate {get; set; }
         public double YCoordinate { get; set; }
-        private int _Radius;
+        protected int _Radius;
 
         public int Radius
         {
