@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeometricObjectsSolution
 {
-    class GraphicCircle : Rectangle
+    class GraphicCircle : Circle
     {
         // -------------Konstruktoren-----------------
         public GraphicCircle() : base(0, 0, 0) { }

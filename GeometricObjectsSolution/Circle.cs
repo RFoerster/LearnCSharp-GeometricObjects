@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace GeometricObjectsSolution
 {
-    public class Rectangle : GeometricObject
+    public delegate void InvalidMeasureEventhandler();
+    public class Circle : GeometricObject
     {
+
+        //--------------Ereignisse---------------
+        public event InvalidMeasureEventhandler InvalidMeasure;
         // -------------Klasseneigenschaft-----------------
 
         protected static int _CountCircles;
@@ -18,14 +22,14 @@ namespace GeometricObjectsSolution
 
         // -------------Konstruktoren-----------------
 
-        public Rectangle() : this(0, 0, 0) { }
-        public Rectangle(int radius) : this(radius, 0, 0) { }
-        public Rectangle(int radius, double x, double y)
+        public Circle() : this(0, 0, 0) { }
+        public Circle(int radius) : this(radius, 0, 0) { }
+        public Circle(int radius, double x, double y)
         {
             Radius = radius;
             XCoordinate = x;
             YCoordinate = y;
-            Rectangle._CountCircles++;
+            Circle._CountCircles++;
         }
 
         // -------------Eigenschaften-----------------
@@ -39,8 +43,8 @@ namespace GeometricObjectsSolution
             {
                 if (value >= 0)
                     _Radius = value;
-                else
-                    Console.WriteLine("Unzulässiger negativer Radius.");
+                else if (InvalidMeasure !=null)
+                    InvalidMeasure();
             }
         }
 
