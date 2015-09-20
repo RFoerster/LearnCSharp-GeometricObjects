@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace GeometricObjectsSolution
 {
@@ -13,12 +14,12 @@ namespace GeometricObjectsSolution
     {
         static void Main(string[] args)
         {
-            Circle kreis1 = new Circle(-10, 5, 4);
-            kreis1.InvalidMeasure += Kreis1_InvalidMeasure;
+            GraphicCircle kreis1 = new GraphicCircle(-10, 5, 4);
             kreis1.InvalidMeasure += kreis_InvalidMeasure;
             Console.WriteLine(kreis1.ToString());
             Console.ReadLine();
             kreis1.Radius = -1;
+            Console.WriteLine(kreis1.ToString());
             Console.ReadLine();
             
                 
@@ -29,9 +30,10 @@ namespace GeometricObjectsSolution
             Console.WriteLine("Du bist dumm");
         }
 
-        public static void kreis_InvalidMeasure()
+        public static void kreis_InvalidMeasure(Circle sender, InvalidMeasureEventArgs e)
         {
-            Console.WriteLine("Unzulässiger negativer Radius.");
+            Console.Write("Unzulässiger negativer Radius ({0}), bitte neuen Radius für {1} eingeben:", e.InvalidMeasure, e.PropertyName);
+            sender.Radius = Convert.ToInt32(Console.ReadLine());
         }
     }
 }

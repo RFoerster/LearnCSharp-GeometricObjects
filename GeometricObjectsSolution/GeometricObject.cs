@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace GeometricObjectsSolution
 {
-    public abstract class GeometricObject
+
+    public class MovingEventArgs : EventArgs
+    {
+        public bool Cancel { get; set; }
+    }
+    public abstract class GeometricObject : INotifyPropertyChanged
     {
         //--------------Klassenvariablen----------------
         private static int _CountGeometricObjects;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public delegate void MovingEventHandler(Object sender, MovingEventArgs e);
+        public delegate void MovedEventHandler(Object sender, EventArgs e);
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public static int CountGeometricObjects
         {
             get { return _CountGeometricObjects; }

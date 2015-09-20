@@ -2,16 +2,59 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace GeometricObjectsSolution
 {
-    public delegate void InvalidMeasureEventhandler();
+    //--------- EventHandler--------------------
+
+    public delegate void InvalidMeasureEventhandler(Circle sender, InvalidMeasureEventArgs e);
+
+    public class InvalidMeasureEventArgs : EventArgs
+    {
+        private int _InvalidMeasure;
+        private string _PropertyName;
+        public int InvalidMeasure
+        {
+            get { return _InvalidMeasure; }
+        }
+
+        public string PropertyName
+        {
+            get { return _PropertyName; }
+        }
+
+        public InvalidMeasureEventArgs(int invalidMeasure, string propertyName)
+        {
+            _InvalidMeasure = invalidMeasure;
+            if (propertyName == null || propertyName == "")
+            {
+                _PropertyName = "[unknown]";
+            }
+            else
+            {
+                _PropertyName = propertyName;
+            }
+        }
+    }
+
+
+
+
+
     public class Circle : GeometricObject
     {
 
         //--------------Ereignisse---------------
         public event InvalidMeasureEventhandler InvalidMeasure;
+
+        public virtual void OnInvalidMeasure(InvalidMeasureEventArgs e)
+        {
+            if (InvalidMeasure != null)
+                InvalidMeasure(this, e);
+        }
+
+
         // -------------Klasseneigenschaft-----------------
 
         protected static int _CountCircles;
@@ -42,9 +85,13 @@ namespace GeometricObjectsSolution
             set
             {
                 if (value >= 0)
+                {
                     _Radius = value;
+                    OnPropertyChanged("RADIUS");
+                }
+                    
                 else if (InvalidMeasure !=null)
-                    InvalidMeasure();
+                    OnInvalidMeasure(new InvalidMeasureEventArgs(value, "Kreis links hinten"));
             }
         }
 
